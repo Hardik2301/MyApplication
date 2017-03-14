@@ -1,4 +1,4 @@
-package com.pratap.gplaystore.models;
+package com.example.imac.cardlist.models;
 
 import java.util.ArrayList;
 

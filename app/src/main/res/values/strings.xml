@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">SamplePlayStore</string>
+    <string name="app_name">CardList Sample</string>
+
+    <string-array name="test">
+        <item>Left</item>
+        <item>Middle</item>
+        <item>Right</item>
+    </string-array>
+
 </resources>

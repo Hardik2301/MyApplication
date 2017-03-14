@@ -1,4 +1,4 @@
-package com.pratap.gplaystore;
+package com.example.imac.cardlist;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

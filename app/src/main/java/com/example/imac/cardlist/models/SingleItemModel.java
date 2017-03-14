@@ -1,4 +1,4 @@
-package com.pratap.gplaystore.models;
+package com.example.imac.cardlist.models;
 
 /**
  * Created by pratap.kesaboyina on 01-12-2015.

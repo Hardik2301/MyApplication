@@ -5,4 +5,9 @@
     <integer name="grid_span_1">1</integer>
     <integer name="grid_span_2">2</integer>
     <integer name="grid_span_3">3</integer>
+
+    <dimen name="icon_arrow_width">16dp</dimen>
+    <dimen name="body_margin">10dp</dimen>
+    <dimen name="twenty">20dp</dimen>
+
 </resources>

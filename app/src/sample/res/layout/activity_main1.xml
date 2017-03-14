@@ -36,19 +36,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient_background"/>
-
-            <com.example.imac.cardlist.view.GroupButtonView
-                android:id="@+id/switchButton"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="10dp"
-                android:textColor="@color/switch_textcolor_selector"
-                app:sw_checkedColor="@color/colorPrimaryDark"
-                app:sw_strokeColor="@color/colorPrimaryDark"
-                app:sw_switchCount="3"
-                app:sw_textArray="@array/test" />
-
+                android:background="@color/colorAccent"/>
         </com.example.imac.cardlist.view.CyclicLayout>
 
         <android.support.v7.widget.RecyclerView

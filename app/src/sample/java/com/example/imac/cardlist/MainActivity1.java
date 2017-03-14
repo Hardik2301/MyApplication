@@ -1,4 +1,4 @@
-package com.pratap.gplaystore;
+package com.example.imac.cardlist;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,13 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.pratap.gplaystore.adapters.RecyclerViewDataAdapter;
-import com.pratap.gplaystore.models.SectionDataModel;
-import com.pratap.gplaystore.models.SingleItemModel;
+import com.example.imac.cardlist.adapters.RecyclerViewDataAdapter;
+import com.example.imac.cardlist.models.SectionDataModel;
+import com.example.imac.cardlist.models.SingleItemModel;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity1 extends AppCompatActivity {
 
     private Toolbar toolbar;
 
@@ -23,21 +23,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main1);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         allSampleData = new ArrayList<SectionDataModel>();
 
         if (toolbar != null) {
+            toolbar.setTitle("Sample Build");
             setSupportActionBar(toolbar);
-            toolbar.setTitle("G PlayStore");
-
         }
 
-
         createDummyData();
-
 
         RecyclerView my_recycler_view = (RecyclerView) findViewById(R.id.my_recycler_view);
 
@@ -48,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         my_recycler_view.setAdapter(adapter);
-
 
     }
 

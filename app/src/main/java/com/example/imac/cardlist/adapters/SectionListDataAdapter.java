@@ -1,11 +1,13 @@
-package com.pratap.gplaystore.adapters;
+package com.example.imac.cardlist.adapters;
 
 /**
  * Created by pratap.kesaboyina on 24-12-2014.
  */
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pratap.gplaystore.R;
-import com.pratap.gplaystore.models.SingleItemModel;
+import com.example.imac.cardlist.R;
+import com.example.imac.cardlist.models.SingleItemModel;
+import com.example.imac.cardlist.util.Screensize;
 
 import java.util.ArrayList;
 
@@ -38,11 +41,11 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
     @Override
     public void onBindViewHolder(SingleItemRowHolder holder, int i) {
 
+        ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(Screensize.getCardItemWidth(mContext),Screensize.getCardItemHeight());
+        holder.itemView.setLayoutParams(params);
         SingleItemModel singleItem = itemsList.get(i);
 
         holder.tvTitle.setText(singleItem.getName());
-
-
        /* Glide.with(mContext)
                 .load(feedItem.getImageURL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -59,28 +62,24 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
     public class SingleItemRowHolder extends RecyclerView.ViewHolder {
 
         protected TextView tvTitle;
-
+        protected CardView itemView;
         protected ImageView itemImage;
 
 
         public SingleItemRowHolder(View view) {
             super(view);
 
+            this.itemView=(CardView)view.findViewById(R.id.list_single_card_item);
             this.tvTitle = (TextView) view.findViewById(R.id.tvTitle);
             this.itemImage = (ImageView) view.findViewById(R.id.itemImage);
-
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
                     Toast.makeText(v.getContext(), tvTitle.getText(), Toast.LENGTH_SHORT).show();
 
                 }
             });
-
-
         }
 
     }
