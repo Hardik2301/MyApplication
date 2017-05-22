@@ -102,36 +102,6 @@ public class CyclicLayout extends FrameLayout {
                     path.close();
                 }
                 break;
-            case POSITION_LEFT:
-                if (cropInside) {
-                    path.moveTo(width, 0);
-                    path.lineTo(0, 0);
-                    path.quadTo(arcHeight * 2, height / 2, 0, height);
-                    path.lineTo(width, height);
-                    path.close();
-                } else {
-                    path.moveTo(width, 0);
-                    path.lineTo(arcHeight, 0);
-                    path.quadTo(-arcHeight, height / 2, arcHeight, height);
-                    path.lineTo(width, height);
-                    path.close();
-                }
-                break;
-            case POSITION_RIGHT:
-                if (cropInside) {
-                    path.moveTo(0, 0);
-                    path.lineTo(width, 0);
-                    path.quadTo(width - arcHeight * 2, height / 2, width, height);
-                    path.lineTo(0, height);
-                    path.close();
-                } else {
-                    path.moveTo(0, 0);
-                    path.lineTo(width - arcHeight, 0);
-                    path.quadTo(width + arcHeight, height / 2, width - arcHeight, height);
-                    path.lineTo(0, height);
-                    path.close();
-                }
-                break;
         }
 
         return path;

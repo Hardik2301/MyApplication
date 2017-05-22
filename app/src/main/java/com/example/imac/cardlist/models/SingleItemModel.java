@@ -9,7 +9,7 @@ public class SingleItemModel {
     private String name;
     private String url;
     private String description;
-
+    private int position;
 
     public SingleItemModel() {
     }
@@ -44,5 +44,11 @@ public class SingleItemModel {
         this.description = description;
     }
 
+    public int getPosition() {
+        return position;
+    }
 
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }

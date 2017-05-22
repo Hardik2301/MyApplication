@@ -14,10 +14,6 @@ import com.example.imac.cardlist.view.GroupButtonView;
 
 import java.util.ArrayList;
 
-/**
- * Created by imac on 3/10/17.
- */
-
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -36,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         allSampleData = new ArrayList<SectionDataModel>();
 
         if (toolbar != null) {
-            toolbar.setTitle("G PlayStore");
+            toolbar.setTitle("Sample App");
             setSupportActionBar(toolbar);
         }
 
@@ -51,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         mSwitchButton.setOnChangeListener(new GroupButtonView.OnChangeListener() {
             @Override
             public void onChange(int position) {
-                Toast.makeText(getApplicationContext(),position+" Clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),position+" Clicked",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -19,12 +19,55 @@
         <attr name="android:textSize" />
         <attr name="sw_textArray" format="string" />
         <attr name="sw_switchCount" format="integer" />
+        <attr name="sw_space" format="integer" />
         <attr name="sw_ThemeStyle" format="reference" />
         <attr name="sw_CornerRadius" format="dimension" />
         <attr name="sw_checkedColor" format="color|reference" />
         <attr name="sw_unCheckedColor" format="color|reference" />
         <attr name="sw_strokeColor" format="color|reference" />
         <attr name="sw_strokeWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="GroupCircleButton">
+        <attr name="android:textColor" />
+        <attr name="android:textSize" />
+        <attr name="gb_textArray" format="string" />
+        <attr name="gb_childMargin" format="integer"/>
+        <attr name="gb_checkedColor" format="color|reference" />
+        <attr name="gb_unCheckedColor" format="color|reference" />
+        <attr name="gb_strokeColor" format="color|reference" />
+        <attr name="gb_strokeWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomScrollView">
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="cs_textArray" format="string"/>
+        <attr name="cs_radious" format="integer"/>
+        <attr name="cs_margintochild" format="integer"/>
+        <attr name="cs_checkedcolor" format="color|reference"/>
+        <attr name="cs_uncheckedcolor" format="color|reference"/>
+        <attr name="cs_strokecolor" format="color|reference"/>
+        <attr name="cs_strokewidth" format="integer"/>
+        <attr name="cs_singleSelection" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SwipeLayout">
+        <attr name="drag_edge">
+            <flag name="left" value="1" />
+            <flag name="right" value="2" />
+            <flag name="top" value="4" />
+            <flag name="bottom" value="8" />
+        </attr>
+        <attr name="leftEdgeSwipeOffset" format="dimension" />
+        <attr name="rightEdgeSwipeOffset" format="dimension" />
+        <attr name="topEdgeSwipeOffset" format="dimension" />
+        <attr name="bottomEdgeSwipeOffset" format="dimension" />
+        <attr name="show_mode" format="enum">
+            <enum name="lay_down" value="0" />
+            <enum name="pull_out" value="1" />
+        </attr>
+        <attr name="clickToClose" format="boolean" />
     </declare-styleable>
 
 </resources>

@@ -1,7 +1,5 @@
 package com.example.imac.cardlist.view;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -19,7 +17,6 @@ import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -28,11 +25,13 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.example.imac.cardlist.R;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Created by imac on 3/10/17.
  */
 
-public class GroupButtonView extends RadioGroup implements OnCheckedChangeListener {
+public class GroupCircleButton extends RadioGroup implements OnCheckedChangeListener {
 
     private final int[] CHECKED_STATE = { android.R.attr.state_checked }, UNCHECKED_STATE = { -android.R.attr.state_checked };
 
@@ -54,9 +53,9 @@ public class GroupButtonView extends RadioGroup implements OnCheckedChangeListen
 
     private int switchCount;
 
-    private int mSpace;
+    private final int default_margins = 5;
 
-    private int defaultSpace=0;
+    private int marginToChild;
 
     // is measurement completed
     private boolean isMeasure;
@@ -73,43 +72,42 @@ public class GroupButtonView extends RadioGroup implements OnCheckedChangeListen
     /**
      * @param context
      */
-    public GroupButtonView(Context context) {
+    public GroupCircleButton(Context context) {
         super(context, null);
     }
 
-    public GroupButtonView(Context context, AttributeSet attrs) {
+    public GroupCircleButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray a = context.obtainStyledAttributes(attrs, new int[]{android.R.attr.orientation, android.R.attr.layout_height});
+        TypedArray a = context.obtainStyledAttributes(attrs, new int[] { android.R.attr.orientation, android.R.attr.layout_height });
         setOrientation(LinearLayout.HORIZONTAL);
-        mParentHeight = a.getDimensionPixelSize(1, 0);
+        //mParentHeight = a.getDimensionPixelSize(1, 0);
         a.recycle();
-        a = context.obtainStyledAttributes(attrs, R.styleable.switchButton);
-        setTextColor(a.getColorStateList(R.styleable.switchButton_android_textColor));
-        setTextArray(a.getTextArray(R.styleable.switchButton_sw_textArray));
-        setSpacetoChild(a.getInteger(R.styleable.switchButton_sw_space, defaultSpace));
-        setSwitchStyle(a.getResourceId(R.styleable.switchButton_sw_ThemeStyle, 0));
-        setCornerRadius(a.getDimension(R.styleable.switchButton_sw_CornerRadius, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5f, getResources().getDisplayMetrics())));
-        setCheckedColor(a.getColor(R.styleable.switchButton_sw_checkedColor, Color.GREEN));
-        setUnCheckedColor(a.getColor(R.styleable.switchButton_sw_unCheckedColor, Color.WHITE));
-        setStrokeColor(a.getColor(R.styleable.switchButton_sw_strokeColor, Color.GREEN));
-        setStrokeWidth((int) a.getDimension(R.styleable.switchButton_sw_strokeWidth, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, getResources().getDisplayMetrics())));
-        setTextSize(a.getDimension(R.styleable.switchButton_android_textSize, 0f));
+        a = context.obtainStyledAttributes(attrs, R.styleable.GroupCircleButton);
+        setTextColor(a.getColorStateList(R.styleable.GroupCircleButton_android_textColor));
+        setTextArray(a.getTextArray(R.styleable.GroupCircleButton_gb_textArray));
+        setMarginToChild(a.getInteger(R.styleable.GroupCircleButton_gb_childMargin,default_margins));
+        setCheckedColor(a.getColor(R.styleable.GroupCircleButton_gb_checkedColor, Color.GREEN));
+        setUnCheckedColor(a.getColor(R.styleable.GroupCircleButton_gb_unCheckedColor, Color.WHITE));
+        setStrokeColor(a.getColor(R.styleable.GroupCircleButton_gb_strokeColor, Color.GREEN));
+        setStrokeWidth((int) a.getDimension(R.styleable.GroupCircleButton_gb_strokeWidth, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, getResources().getDisplayMetrics())));
+        setTextSize(a.getDimension(R.styleable.GroupCircleButton_android_textSize, 0f));
         a.recycle();
         setOnCheckedChangeListener(this);
-
     }
 
     @SuppressWarnings("deprecation")
     @SuppressLint("NewApi")
     private void initUI(Context context) {
+
         if (mTexts != null && mTexts.length != switchCount) {
             throw new IllegalArgumentException("The textArray's length must equal to the switchCount");
         }
         if (mParentWidth == 0)
             return;
         ColorDrawable colorDrawable = new ColorDrawable();
-        LayoutParams mParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, mParentHeight, 1);
-        mParams.setMarginStart(mSpace);
+        LayoutParams mParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getCalWidth(), 1);
+        Log.e("initUI: ", getCalWidth()+"");
+        mParams.setMargins(marginToChild,0,0,0);
         for (int i = 0; i < switchCount; i++) {
             if (mRadioArrays == null)
                 mRadioArrays = new SparseArray<RadioButton>();
@@ -122,7 +120,6 @@ public class GroupButtonView extends RadioGroup implements OnCheckedChangeListen
                 mRadioButton.setBackgroundDrawable(getStateDrawable(i));
             }
             mRadioButton.setText(mTexts[i]);
-            mRadioButton.setTextAppearance(R.style.GroupButtonText);
             if (mRadioButton.getId() < 0) {
                 int id = getViewId();
                 if (mSparseIds == null)
@@ -135,32 +132,27 @@ public class GroupButtonView extends RadioGroup implements OnCheckedChangeListen
             mRadioButton.setChecked(mCurrentPosition == i);
             addView(mRadioButton, i);
             mRadioArrays.put(i, mRadioButton);
+            setHorizontalScrollBarEnabled(true);
         }
     }
 
     private Drawable getStateDrawable(int i) {
-        float leftRadius = 0,rightRadius = 0;
         if (mStateDrawables == null)
             mStateDrawables = new SparseArray<StateListDrawable>();
         StateListDrawable mStateListDrawable = mStateDrawables.size() >= i + 1 && (i != switchCount - 1 || i == switchCount - 1) ? null : mStateDrawables.get(i);
         if (mStateListDrawable == null) {
-            if(mSpace == 0) {
-                leftRadius = i == 0 ? cornerRadius : 0;
-                rightRadius = i == 0 ? 0 : i == switchCount - 1 ? cornerRadius : 0;
-            }else{
-                leftRadius = cornerRadius;
-                rightRadius = cornerRadius;
-            }
+            float leftRadius = i == 0 ? cornerRadius : 0;
+            float rightRadius = i == 0 ? 0 : i == switchCount - 1 ? cornerRadius : 0;
             float[] cRadius = { leftRadius, leftRadius, rightRadius, rightRadius, rightRadius, rightRadius, leftRadius, leftRadius };
             mStateListDrawable = new StateListDrawable();
             GradientDrawable cornerDrawable = new GradientDrawable();
             cornerDrawable.setColor(checkedColor);
-            cornerDrawable.setCornerRadii(cRadius);
+            cornerDrawable.setShape(GradientDrawable.OVAL);
             mStateListDrawable.addState(CHECKED_STATE, cornerDrawable);
             cornerDrawable = new GradientDrawable();
             cornerDrawable.setColor(unCheckedColor);
             cornerDrawable.setStroke(strokeWidth, strokeColor);
-            cornerDrawable.setCornerRadii(cRadius);
+            cornerDrawable.setShape(GradientDrawable.OVAL);
             mStateListDrawable.addState(UNCHECKED_STATE, cornerDrawable);
             mStateDrawables.put(i, mStateListDrawable);
         }
@@ -231,16 +223,12 @@ public class GroupButtonView extends RadioGroup implements OnCheckedChangeListen
         this.mTextColor = mTextColor;
     }
 
-    public void setSwitchStyle(int mSwitchStyle) {
-        this.mRadioStyle = mSwitchStyle;
-    }
-
     public void setTextArray(CharSequence[] mTexts) {
-        this.switchCount = mTexts.length < 2 ? DEFAULT_SWITCH_COUNT : mTexts.length;
         this.mTexts = mTexts;
+        setSwitchCount(mTexts.length);
     }
 
-    public int getSwitchCount() {
+    public int getCount() {
         return switchCount;
     }
 
@@ -256,10 +244,6 @@ public class GroupButtonView extends RadioGroup implements OnCheckedChangeListen
         this.switchCount = switchCount < 2 ? DEFAULT_SWITCH_COUNT : switchCount;
         if (mButtonDrawables == null)
             mButtonDrawables = new SparseArray<Drawable>();
-    }
-
-    public void setCornerRadius(float cornerRadius) {
-        this.cornerRadius = cornerRadius;
     }
 
     public void setCheckedColor(int checkedColor) {
@@ -282,16 +266,12 @@ public class GroupButtonView extends RadioGroup implements OnCheckedChangeListen
         this.textSize = textSize;
     }
 
-    public void setSwitchButton(int position, int mDrawableResId) {
-        mButtonDrawables.put(position, getResources().getDrawable(mDrawableResId));
-    }
-
     public void setOnChangeListener(OnChangeListener eventListener) {
         this.changeListener = eventListener;
     }
 
-    public void setSpacetoChild(int spacetoChild) {
-        this.mSpace = spacetoChild;
+    public void setMarginToChild(int marginToChild) {
+        this.marginToChild = marginToChild;
     }
 
     public interface OnChangeListener {
@@ -312,5 +292,11 @@ public class GroupButtonView extends RadioGroup implements OnCheckedChangeListen
                 return result;
             }
         }
+    }
+
+    private int getCalWidth(){
+        int tmp=getWidth()/switchCount;
+        tmp = tmp - marginToChild;
+        return tmp;
     }
 }

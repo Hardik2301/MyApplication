@@ -38,18 +38,43 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/gradient_background"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
             <com.example.imac.cardlist.view.GroupButtonView
                 android:id="@+id/switchButton"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_margin="10dp"
-                android:textColor="@color/switch_textcolor_selector"
                 app:sw_checkedColor="@color/colorPrimaryDark"
                 app:sw_strokeColor="@color/colorPrimaryDark"
-                app:sw_switchCount="3"
+                app:sw_space="10"
                 app:sw_textArray="@array/test" />
 
+            <com.example.imac.cardlist.view.GroupButtonView
+                android:id="@+id/switchButton1"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                app:sw_checkedColor="@color/colorPrimaryDark"
+                app:sw_strokeColor="@color/colorPrimaryDark"
+                app:sw_textArray="@array/test1" />
+
+            </LinearLayout>
         </com.example.imac.cardlist.view.CyclicLayout>
+
+        <!--<com.example.imac.cardlist.view.GroupCircleButton
+            android:id="@+id/groupCircleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"
+            app:gb_checkedColor="@color/colorAccent"
+            app:gb_unCheckedColor="@color/colorPrimary"
+            app:gb_strokeColor="@color/colorPrimaryDark"
+            app:gb_textArray="@array/size" />-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/my_recycler_view"
@@ -60,4 +85,5 @@
             android:scrollbars="none" />
 
     </LinearLayout>
+
 </android.support.v4.widget.NestedScrollView>

@@ -1,10 +1,30 @@
 <resources>
-    <string name="app_name">CardList Sample</string>
+    <string name="app_name">My Application</string>
 
     <string-array name="test">
-        <item>Left</item>
-        <item>Middle</item>
-        <item>Right</item>
+        <item>buy</item>
+        <item>rent</item>
+        <item>projects</item>
+        <item>services</item>
     </string-array>
+
+    <string-array name="test1">
+        <item>Residential</item>
+        <item>Commercial</item>
+    </string-array>
+
+    <string-array name="size">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://www.google.co.in\",\n  }\n}]</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

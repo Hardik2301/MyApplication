@@ -61,10 +61,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
             public void onClick(View v) {
                 int rvpos=linearLayoutManager.findLastCompletelyVisibleItemPosition();
                 if(rvpos < itemListDataAdapter.getItemCount()){
-                    //linearLayoutManager.scrollToPosition(rvpos+1);
                     itemRowHolder.recycler_view_list.smoothScrollToPosition(rvpos+1);
-                }else{
-                    Toast.makeText(mContext,"No item Available",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -74,10 +71,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
             public void onClick(View v) {
                 int rvpos=linearLayoutManager.findFirstCompletelyVisibleItemPosition();
                 if(rvpos >= 1){
-                    //linearLayoutManager.scrollToPosition(rvpos-1);
                     itemRowHolder.recycler_view_list.smoothScrollToPosition(rvpos-1);
-                }else{
-                    Toast.makeText(mContext,"No item Available",Toast.LENGTH_LONG).show();
                 }
             }
         });

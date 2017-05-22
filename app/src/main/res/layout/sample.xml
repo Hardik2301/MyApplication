@@ -1,18 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.imac.cardlist.view.GroupButtonView
-        android:id="@+id/switchButton"
+    <!-- TODO this is sample view -->
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="5dp"
-        android:textColor="@color/switch_textcolor_selector"
-        app:sw_checkedColor="@color/colorPrimary"
-        app:sw_strokeColor="@color/colorPrimaryDark"
-        app:sw_switchCount="3"
-        app:sw_textArray="@array/test" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyView"
+        android:text="No Data Found"
+        android:visibility="gone"
+        android:gravity="center"/>
+    </LinearLayout>
+
+    <!--<com.example.imac.cardlist.view.GroupCircleButton
+        android:id="@+id/groupCircleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        app:gb_checkedColor="@color/colorAccent"
+        app:gb_unCheckedColor="@color/colorPrimary"
+        app:gb_strokeColor="@color/colorPrimaryDark"
+        app:gb_textArray="@array/size" />-->
+
+    <com.example.imac.cardlist.view.CustomScrollView
+        android:id="@+id/CustomScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cs_textArray="@array/size"
+        app:cs_singleSelection="false"
+        android:textColor="@color/white"
+        android:layout_below="@+id/linearLayout1"/>
+
+
+</RelativeLayout>

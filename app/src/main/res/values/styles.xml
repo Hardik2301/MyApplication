@@ -18,4 +18,8 @@
         <item name="colorButtonNormal">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="GroupButtonText" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:textColor">@color/switch_textcolor_selector</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 </resources>
